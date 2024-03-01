@@ -1,0 +1,18 @@
+version: '3'
+services:
+  test:
+    image: service/yumrepo:0.1
+    container_name: ttnfs
+    volumes:
+      - /home/docker-mirror/docker-mirror/rpm:/usr/share/nginx/html/rpm:z
+    ports:
+      - 5018:80
+    restart: always
+    # command: ["/usr/sbin/nginx"]
+  test1:
+    image: service/yumupdate:0.1
+    container_name: ttnfs2
+    volumes:
+      - /home/docker-mirror/docker-mirror/rpm:/root/rpm:z
+    restart: always
+    command: ["/bin/bash"]

@@ -1,0 +1,19 @@
+FROM hub.xdxct.com/xdxct-docker/centos:base-centos7
+ENV LANG C.UTF-8
+
+WORKDIR /root/
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN sed -e 's|^mirrorlist=|#mirrorlist=|g' \
+    -e 's|^#baseurl=http://mirror.centos.org/centos|baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos|g' \
+    -i.bak \
+    /etc/yum.repos.d/CentOS-*.repo
+
+RUN  yum install -y \
+       createrepo \
+       vim \
+       httpd \
+    && rm -rf /var/cache/yum/*
+
+CMD ["/usr/bin/createrepo", "/root/rpm"]

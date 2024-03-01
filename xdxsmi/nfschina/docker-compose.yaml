@@ -1,0 +1,11 @@
+version: '3'
+services:
+  test:
+    image: xdxsmi/nfs:0.1
+    container_name: ttnfs
+    volumes:
+      - /home/xiaoqing/workspace/xdxml_lib:/root/workspace/xdxml_lib:z
+    ports:
+      - 80:80
+    restart: always
+    command: ["/bin/bash"]
